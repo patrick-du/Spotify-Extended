@@ -1,8 +1,8 @@
 // Imports
-import * as dotenv from 'dotenv';
-import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan';
+const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const morgan = require('morgan');
 
 // Config
 dotenv.config();
@@ -19,9 +19,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Routes
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+app.use(require('./routes'));
 
 // Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
