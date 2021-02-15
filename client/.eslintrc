@@ -1,13 +1,20 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "extends": ["airbnb-typescript", "prettier", "prettier/@typescript-eslint"],
+  "extends": [
+    "airbnb-typescript",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
   "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-one-expression-per-line": "off"
   },
   "env": {
     "es6": true

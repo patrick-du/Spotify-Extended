@@ -1,21 +1,22 @@
-import React from 'react';
-import './App.css';
+import * as React from 'react';
+import { ChakraProvider, Box } from '@chakra-ui/react';
+import theme from './theme';
+import Unauthenticated from './pages/Unauthenticated';
+import Store from './store';
 
-function App() {
+const App = () => {
+  const hi = 'asd';
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit
-          <code>src/App.tsx</code>
-          and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider theme={theme}>
+      <Store>
+        <Box textAlign="center" fontSize="xl" p={20} maxW="1440px" mx="auto">
+          <Unauthenticated />
+          {hi}
+        </Box>
+      </Store>
+    </ChakraProvider>
   );
-}
+};
 
 export default App;
