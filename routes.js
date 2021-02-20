@@ -6,15 +6,10 @@ const router = express.Router();
 
 const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, FRONTEND_URI } = process.env;
 
-// Base Route
-router.get('/', (req, res) => {
-  res.send('Hello asd');
-});
-
 // Login Route
 router.get('/login', (req, res) => {
   const scopes =
-    'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify playlist-read-private playlist-read-collaborative playlist-modify-public';
+    'user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-follow-modify user-library-read playlist-read-private playlist-read-collaborative playlist-modify-public';
   const queryRoute = queryString.stringify({
     response_type: 'code',
     client_id: CLIENT_ID,
@@ -42,13 +37,13 @@ router.get('/callback', (req, res) => {
 
   request.post(authOptions, (error, response, body) => {
     if (!error && response.statusCode === 200) {
-      const accessToken = body.access_token;
-      const refreshToken = body.refresh_token;
-      const queryRoute = queryString.stringify({ accessToken, refreshToken });
-      res.redirect(`${FRONTEND_URI}/#${queryRoute}`);
+      const expiresIn = body.expires_in * 1000;
+      res.cookie('accessToken', body.access_token, { expires: new Date(Date.now() + expiresIn) });
+      res.cookie('refreshToken', body.refresh_token);
+      res.redirect(`${FRONTEND_URI}`);
     } else {
       const queryRoute = queryString.stringify({ error: 'invalid_token' });
-      res.redirect(`/#${queryRoute}`);
+      res.redirect(`${FRONTEND_URI}/#${queryRoute}`);
     }
   });
 });
@@ -71,7 +66,9 @@ router.get('/refresh_token', (req, res) => {
   request.post(authOptions, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       const accessToken = body.access_token;
-      res.send({ accessToken });
+      const expiresIn = body.expires_in * 1000;
+      res.cookie('accessToken', accessToken, { expires: new Date(Date.now() + expiresIn) });
+      res.send(accessToken);
     }
   });
 });
