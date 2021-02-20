@@ -13,6 +13,7 @@
   },
   "rules": {
     "linebreak-style": 0,
+    "no-param-reassign": ["error", { "props": false }],
     "react/jsx-props-no-spreading": "off",
     "react/jsx-one-expression-per-line": "off"
   },

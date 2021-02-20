@@ -1,20 +1,23 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { ChakraProvider, Box } from '@chakra-ui/react';
+
 import theme from './theme';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import Authenticated from './pages/Authenticated';
 import Unauthenticated from './pages/Unauthenticated';
-import Store from './store';
+import NavigationBar from './components/NavigationBar';
 
 const App = () => {
-  const hi = 'asd';
+  const isAuthenticated = useAppSelector(state => state.auth.accessToken);
+
 
   return (
     <ChakraProvider theme={theme}>
-      <Store>
         <Box textAlign="center" fontSize="xl" p={20} maxW="1440px" mx="auto">
-          <Unauthenticated />
-          {hi}
+        <NavigationBar />
+        {isAuthenticated ? <Authenticated /> : <Unauthenticated />}
         </Box>
-      </Store>
     </ChakraProvider>
   );
 };

@@ -1,13 +1,18 @@
-import * as React from 'react'
+import * as React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { ColorModeScript } from '@chakra-ui/react';
 import App from './App';
+import store from './store/store';
+
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
