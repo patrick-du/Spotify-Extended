@@ -1,3 +1,3 @@
 import authReducer from './authSlice';
 
-export { authReducer };
+export default authReducer;

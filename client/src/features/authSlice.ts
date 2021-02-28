@@ -20,9 +20,14 @@ export const slice = createSlice({
     setRefreshToken: (state, action: PayloadAction<string>) => {
       state.refreshToken = action.payload;
     },
+    resetAuthState: () => initialState,
   },
 });
 
-export const { setAccessToken, setRefreshToken } = slice.actions;
+export const {
+  setAccessToken,
+  setRefreshToken,
+  resetAuthState,
+} = slice.actions;
 
 export default slice.reducer;
