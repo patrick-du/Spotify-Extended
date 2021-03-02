@@ -2,18 +2,18 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { ChakraProvider, Box } from '@chakra-ui/react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import theme from './theme';
-import { useAppDispatch, useAppSelector } from './store/hooks';
+import { useAppSelector, useAppDispatch } from './store/hooks';
 import { setAccessToken, setRefreshToken } from './features/authSlice';
 import { refreshAccessToken } from './services/spotify';
-import Authenticated from './pages/Authenticated';
-import Unauthenticated from './pages/Unauthenticated';
+import { Dashboard, Landing, User, Playlists } from './pages';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   const dispatch = useAppDispatch();
   const [cookies] = useCookies();
-
   const isAuthenticated = useAppSelector(state => state.auth.accessToken);
 
   const getAuthTokens = async () => {
@@ -31,7 +31,14 @@ const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <Box fontSize="xl" p={30} maxW="1440px" mx="auto">
-        {isAuthenticated ? <Authenticated /> : <Unauthenticated />}
+        <Switch>
+          <ProtectedRoute path="/dashboard" component={Dashboard} />
+          <ProtectedRoute path="/user" component={User} />
+          <ProtectedRoute path="/playlists" component={Playlists} />
+          <Route exact path="/">
+            {isAuthenticated ? <Redirect to="/dashboard" /> : <Landing />}
+          </Route>
+        </Switch>
       </Box>
     </ChakraProvider>
   );

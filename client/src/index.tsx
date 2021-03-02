@@ -2,6 +2,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { CookiesProvider } from 'react-cookie';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { ColorModeScript } from '@chakra-ui/react';
 import App from './App';
 import store from './store/store';
@@ -12,9 +13,11 @@ ReactDOM.render(
   <React.StrictMode>
     <ColorModeScript />
     <CookiesProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
     </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root'),

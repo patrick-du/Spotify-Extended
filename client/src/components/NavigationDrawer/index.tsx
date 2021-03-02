@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useCookies } from 'react-cookie';
 import { FaBars } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../store/hooks';
 import { resetAuthState } from '../../features/authSlice';
 import ColorModeSwitcher from '../ColorModeSwitcher';
@@ -27,6 +28,12 @@ const NavigationDrawer = () => {
     dispatch(resetAuthState());
     onClose();
   };
+
+  const navigationLinks = [
+    { path: '/dashboard', text: 'Dashboard' },
+    { path: '/playlists', text: 'Playlists' },
+    { path: '/user', text: 'Users' },
+  ];
 
   return (
     <>
@@ -45,6 +52,13 @@ const NavigationDrawer = () => {
             </DrawerHeader>
 
             <DrawerBody>
+              {navigationLinks.map(({ path, text }) => (
+                <Link to={path}>
+                  <Button variant="ghost" w="100%" onClick={onClose}>
+                    {text}
+                  </Button>
+                </Link>
+              ))}
               <Button variant="ghost" w="100%" onClick={handleLogOut}>
                 Log Out
               </Button>
