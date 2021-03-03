@@ -8,7 +8,7 @@ import theme from './theme';
 import { useAppSelector, useAppDispatch } from './store/hooks';
 import { setAccessToken, setRefreshToken } from './features/authSlice';
 import { refreshAccessToken } from './services/spotify';
-import { Dashboard, Landing, User, Playlists } from './pages';
+import { Home, Landing, User, Playlists } from './pages';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
@@ -32,11 +32,11 @@ const App = () => {
     <ChakraProvider theme={theme}>
       <Box fontSize="xl" p={30} maxW="1440px" mx="auto">
         <Switch>
-          <ProtectedRoute path="/dashboard" component={Dashboard} />
+          <ProtectedRoute path="/home" component={Home} />
           <ProtectedRoute path="/user" component={User} />
           <ProtectedRoute path="/playlists" component={Playlists} />
           <Route exact path="/">
-            {isAuthenticated ? <Redirect to="/dashboard" /> : <Landing />}
+            {isAuthenticated ? <Redirect to="/home" /> : <Landing />}
           </Route>
         </Switch>
       </Box>

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { VStack, Heading, Text } from '@chakra-ui/react';
 
-const Dashboard = () => (
+const Home = () => (
   <VStack spacing={8}>
-    <Heading as="h1">Dashboard</Heading>
+    <Heading as="h1">Home</Heading>
     <Text>You&apos;re logged in!</Text>
   </VStack>
 );
 
-export default Dashboard;
+export default Home;

@@ -30,7 +30,7 @@ const NavigationDrawer = () => {
   };
 
   const navigationLinks = [
-    { path: '/dashboard', text: 'Dashboard' },
+    { path: '/home', text: 'Home' },
     { path: '/playlists', text: 'Playlists' },
     { path: '/user', text: 'Users' },
   ];
@@ -53,7 +53,7 @@ const NavigationDrawer = () => {
 
             <DrawerBody>
               {navigationLinks.map(({ path, text }) => (
-                <Link to={path}>
+                <Link to={path} key={text}>
                   <Button variant="ghost" w="100%" onClick={onClose}>
                     {text}
                   </Button>
