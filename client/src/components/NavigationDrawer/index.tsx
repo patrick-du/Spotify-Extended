@@ -1,18 +1,22 @@
 import * as React from 'react';
 import {
-  Button,
   Drawer,
   DrawerBody,
   DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   useDisclosure,
   IconButton,
+  VStack,
+  Link,
+  Button,
+  Spacer,
+  DrawerHeader,
 } from '@chakra-ui/react';
 import { useCookies } from 'react-cookie';
-import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import { FaBars, FaGithub } from 'react-icons/fa';
+import NavigationButton from './NavigationButton';
 import { useAppDispatch } from '../../store/hooks';
 import { resetAuthState } from '../../features/authSlice';
 import ColorModeSwitcher from '../ColorModeSwitcher';
@@ -30,9 +34,9 @@ const NavigationDrawer = () => {
   };
 
   const navigationLinks = [
-    { path: '/home', text: 'Home' },
-    { path: '/playlists', text: 'Playlists' },
-    { path: '/user', text: 'Users' },
+    { path: '/home', text: 'Home', onClick: onClose },
+    { path: '/playlists', text: 'Playlists', onClick: onClose },
+    { path: '/user', text: 'Users', onClick: onClose },
   ];
 
   return (
@@ -44,28 +48,39 @@ const NavigationDrawer = () => {
         icon={<FaBars />}
         aria-label="Open App Drawer"
       />
-      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose} autoFocus={false}>
         <DrawerOverlay>
           <DrawerContent>
             <DrawerHeader borderBottomWidth="1px">
               Spotify Extended
             </DrawerHeader>
-
             <DrawerBody>
-              {navigationLinks.map(({ path, text }) => (
-                <Link to={path} key={text}>
-                  <Button variant="ghost" w="100%" onClick={onClose}>
-                    {text}
-                  </Button>
-                </Link>
-              ))}
-              <Button variant="ghost" w="100%" onClick={handleLogOut}>
-                Log Out
-              </Button>
+              <VStack spacing={2}>
+                {navigationLinks.map(({ path, text, onClick }) => (
+                  <NavigationButton
+                    path={path}
+                    text={text}
+                    handleClick={onClick}
+                  />
+                ))}
+              </VStack>
             </DrawerBody>
 
             <DrawerFooter>
-              <ColorModeSwitcher alignSelf="end" />
+              <ColorModeSwitcher />
+              <IconButton
+                as={Link}
+                href="https://github.com/patrick-du/spotify-extended"
+                isExternal
+                fontSize="lg"
+                variant="ghost"
+                icon={<FaGithub />}
+                aria-label="Github Repo"
+              />
+              <Spacer />
+              <Button as={RouterLink} to="/" onClick={handleLogOut}>
+                Log Out
+              </Button>
             </DrawerFooter>
           </DrawerContent>
         </DrawerOverlay>
