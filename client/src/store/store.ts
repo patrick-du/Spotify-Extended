@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authReducer, userReducer } from '../features';
+import { authReducer, userReducer, playlistsReducer } from '../features';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     user: userReducer,
+    playlists: playlistsReducer,
   },
 });
 

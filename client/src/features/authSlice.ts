@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { spotifyService } from '../services/api';
+import { spotifyRequest } from '../services/api';
 
 interface IInitialAuthState {
   accessToken: string;
@@ -16,7 +16,7 @@ export const slice = createSlice({
   initialState,
   reducers: {
     setAccessToken: (state, action: PayloadAction<string>) => {
-      spotifyService.defaults.headers.common.Authorization = `Bearer ${action.payload}`;
+      spotifyRequest.defaults.headers.common.Authorization = `Bearer ${action.payload}`;
       state.accessToken = action.payload;
     },
     setRefreshToken: (state, action: PayloadAction<string>) => {

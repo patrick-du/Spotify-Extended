@@ -7,7 +7,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import theme from './theme';
 import { useAppSelector, useAppDispatch } from './store/hooks';
 import { setAccessToken, setRefreshToken } from './features/authSlice';
-import { refreshAccessToken } from './services/spotify';
+import { refreshAccessToken } from './services/auth';
 import { Home, Landing, User, Playlists } from './pages';
 import ProtectedRoute from './components/ProtectedRoute';
 

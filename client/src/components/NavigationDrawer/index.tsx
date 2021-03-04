@@ -48,7 +48,12 @@ const NavigationDrawer = () => {
         icon={<FaBars />}
         aria-label="Open App Drawer"
       />
-      <Drawer isOpen={isOpen} placement="left" onClose={onClose} autoFocus={false}>
+      <Drawer
+        isOpen={isOpen}
+        placement="left"
+        onClose={onClose}
+        autoFocus={false}
+      >
         <DrawerOverlay>
           <DrawerContent>
             <DrawerHeader borderBottomWidth="1px">
@@ -58,6 +63,7 @@ const NavigationDrawer = () => {
               <VStack spacing={2}>
                 {navigationLinks.map(({ path, text, onClick }) => (
                   <NavigationButton
+                    key={text}
                     path={path}
                     text={text}
                     handleClick={onClick}

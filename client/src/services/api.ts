@@ -6,7 +6,7 @@ import axios from 'axios';
 //     ? {}
 //     : { 'Access-Control-Allow-Origin': 'http://localhost:3000' };
 
-const authService = axios.create({
+const serverRequest = axios.create({
   baseURL:
     process.env.NODE_ENV === 'production'
       ? 'https://google.com'
@@ -15,7 +15,7 @@ const authService = axios.create({
   // headers,
 });
 
-const spotifyService = axios.create({
+const spotifyRequest = axios.create({
   baseURL: 'https://api.spotify.com',
   timeout: 1000,
   // headers: {
@@ -24,4 +24,4 @@ const spotifyService = axios.create({
   // headers,
 });
 
-export { authService, spotifyService };
+export { serverRequest, spotifyRequest };

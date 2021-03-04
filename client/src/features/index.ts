@@ -1,4 +1,5 @@
 import authReducer from './authSlice';
 import userReducer from './userSlice';
+import playlistsReducer from './playlistsSlice';
 
-export { authReducer, userReducer };
+export { authReducer, userReducer, playlistsReducer };
