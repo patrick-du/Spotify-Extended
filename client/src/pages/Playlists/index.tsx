@@ -14,7 +14,7 @@ import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import {
   IInitialPlaylistsState,
   setPlaylists,
-} from '../../features/playlistsSlice';
+} from '../../store/features/playlistsSlice';
 
 const Playlists = () => {
   const dispatch = useAppDispatch();

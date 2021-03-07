@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SimplifiedPlaylistObject } from '../services/spotify/interfaces';
+import { SimplifiedPlaylistObject } from '../../services/spotify/interfaces';
 
 export interface IInitialPlaylistsState {
   items?: [SimplifiedPlaylistObject];

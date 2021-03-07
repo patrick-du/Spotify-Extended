@@ -1,4 +1,4 @@
-import { getCurrentUserProfile } from './user';
+import { getCurrentUser } from './user';
 import { getCurrentUserPlaylists } from './playlists';
 
-export { getCurrentUserProfile, getCurrentUserPlaylists };
+export { getCurrentUser, getCurrentUserPlaylists };

@@ -1,35 +1,22 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import { VStack, Heading, Text, Image } from '@chakra-ui/react';
-import { getCurrentUserProfile } from '../../services/spotify';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import { IInitialUserState, setUserInfo } from '../../features/userSlice';
+import { userSelector } from '../../store/selectors';
+import DispatchStatus from '../../store/constants';
+import { fetchUser } from '../../store/features/userSlice';
 
 const Home = () => {
   const dispatch = useAppDispatch();
-
-  const user = useAppSelector(state => state.user);
+  const user = useAppSelector(userSelector.selectUser);
+  const userStatus = useAppSelector(userSelector.selectUserStatus);
   const { name, image } = user;
 
-  const fetchUser = async () => {
-    const userDetails = await getCurrentUserProfile();
-    console.log(userDetails);
-    if (userDetails) {
-      const { id, email, followers, images } = userDetails;
-      const payload: IInitialUserState = {
-        name: userDetails.display_name,
-        id,
-        email,
-        followers: followers.total,
-        image: images[0].url,
-      };
-      await dispatch(setUserInfo(payload));
-    }
-  };
-
   useEffect(() => {
-    fetchUser();
-  }, []);
+    if (userStatus === DispatchStatus.idle) {
+      dispatch(fetchUser());
+    }
+  }, [userStatus, dispatch]);
 
   return (
     <VStack p="3">

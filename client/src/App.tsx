@@ -6,21 +6,24 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import theme from './theme';
 import { useAppSelector, useAppDispatch } from './store/hooks';
-import { setAccessToken, setRefreshToken } from './features/authSlice';
-import { refreshAccessToken } from './services/auth';
+import {
+  fetchAccessToken,
+  setAccessToken,
+  setRefreshToken,
+} from './store/features/authSlice';
+import { authSelector } from './store/selectors';
 import { Home, Landing, User, Playlists } from './pages';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => {
   const dispatch = useAppDispatch();
   const [cookies] = useCookies();
-  const isAuthenticated = useAppSelector(state => state.auth.accessToken);
+  const isAuthenticated = useAppSelector(authSelector.selectAccessToken);
 
   const getAuthTokens = async () => {
     const { accessToken, refreshToken } = cookies;
     if (accessToken && refreshToken) dispatch(setAccessToken(accessToken));
-    if (!accessToken && refreshToken)
-      dispatch(setAccessToken(await refreshAccessToken(refreshToken)));
+    if (!accessToken && refreshToken) dispatch(fetchAccessToken(refreshToken));
     if (refreshToken) dispatch(setRefreshToken(refreshToken));
   };
 

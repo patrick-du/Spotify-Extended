@@ -18,7 +18,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { FaBars, FaGithub } from 'react-icons/fa';
 import NavigationButton from './NavigationButton';
 import { useAppDispatch } from '../../store/hooks';
-import { resetAuthState } from '../../features/authSlice';
+import { resetAuthState } from '../../store/features/authSlice';
 import ColorModeSwitcher from '../ColorModeSwitcher';
 
 const NavigationDrawer = () => {

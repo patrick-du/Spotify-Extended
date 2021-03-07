@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authReducer, userReducer, playlistsReducer } from '../features';
+import authReducer from './features/authSlice';
+import userReducer from './features/userSlice';
+import playlistsReducer from './features/playlistsSlice';
 
 const store = configureStore({
   reducer: {
